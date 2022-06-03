@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+  docker-with-node:
+    image: docker-with-node
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+      - 3000:3000
+    volumes:
+      - ./:/app
+      - app/node_modules
+    env_file:
+      - ./.env
+    # environment:
+    #   NODE_ENV: production
