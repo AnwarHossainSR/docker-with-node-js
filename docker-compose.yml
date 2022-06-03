@@ -2,10 +2,7 @@ version: "3.4"
 
 services:
   docker-with-node:
-    image: docker-with-node
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    build: .
     ports:
       - 5000:5000
       - 3000:3000
