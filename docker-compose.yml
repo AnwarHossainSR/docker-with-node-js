@@ -12,3 +12,8 @@ services:
       - ./.env
     # environment:
     #   NODE_ENV: production
+  mongo:
+    image: mongo
+    container_name: mongo
+    # ports:
+    #   - "27017:27017"

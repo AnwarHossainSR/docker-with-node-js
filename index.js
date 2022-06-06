@@ -1,27 +1,28 @@
-const express = require("express");
-require("dotenv").config();
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import PostRoute from "./Routes/PostRoute.js";
 const app = express();
-const cors = require("cors");
+
+dotenv.config();
 app.use(express.json());
 app.use(cors());
 
-const user = [
-  {
-    name: "Mahedi Hasan",
-    age: "21",
-    email: "mahedisr@gmail.com",
-  },
-  {
-    name: "Anwar Hossain",
-    age: "25",
-    email: "mahedisr2@gmail.com",
-  },
-];
+mongoose
+  .connect(
+    "mongodb+srv://user:RktkkTGK2dcU5DA7@cluster0.yrm1z.mongodb.net/TestSchema?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() =>
+    app.listen(process.env.PORT, () => {
+      console.log("MongoDB connected");
+      console.log(`Listening at ${process.env.PORT}`);
+    })
+  )
+  .catch((error) => console.log(error));
 
-app.get("/", (req, res) => {
-  res.send(user);
-});
-
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.use("/post", PostRoute);
